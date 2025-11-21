@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teachers;
 
 class TeachersController extends Controller
 {
@@ -11,15 +12,17 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = teachers::all();
+
+        return view('teacher', compact('teachers'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(teachers $teachers)
     {
-        //
+        return view('teachers.create');
     }
 
     /**
@@ -27,7 +30,13 @@ class TeachersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teacher = new teachers();
+        $teacher->nombreApellido = $request->nombre;
+        $teacher->profesion = $request->profesion;
+        $teacher->gradoAcademico = $request->grado;
+        $teacher->telefono = $request->telefono;
+        $teacher->save();
+        return redirect()->route('teachers.index')->with('success', 'Profesor creado correctamente');
     }
 
     /**
@@ -35,7 +44,9 @@ class TeachersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $teacher = teachers::findOrFail($id);
+
+        return view('teachers.show', compact('teacher'));
     }
 
     /**
@@ -43,7 +54,9 @@ class TeachersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher = teachers::findOrFail($id);
+
+        return view('teachers.edit', compact('teacher'));
     }
 
     /**
@@ -51,7 +64,11 @@ class TeachersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $teacher = teachers::findOrFail($id);
+
+        $teacher->update($request->all());
+
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -59,6 +76,9 @@ class TeachersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $teacher = teachers::findOrFail($id);
+        $teacher->delete();
+
+        return redirect()->route('teachers.index');
     }
 }

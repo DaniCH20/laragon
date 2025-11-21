@@ -20,9 +20,9 @@ class StudentsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Students $students)
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -30,7 +30,14 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student=New Students();
+        $student->nombre_Apellido=$request->nombre;
+        $student->edad=$request->edad;
+        $student->telefono=$request->telefono;
+        $student->direccion=$request->direccion;
+        $student->foto=$request->foto;
+        $student->save();
+         return redirect()->route('students.index')->with('success', 'Estudiante creado correctamente');
     }
 
     /**
@@ -38,7 +45,9 @@ class StudentsController extends Controller
      */
     public function show(string $id)
     {
-        //
+         $student = Students::findOrFail($id);
+
+        return view('students.show', compact('student'));
     }
 
     /**

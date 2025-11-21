@@ -1,49 +1,49 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h1>Lista de Alumnos</h1>
+    <h1>Lista de Profesores</h1>
 
-    @if ($students->isEmpty())
-        <p>No hay alumnos registrados en el centro.</p>
+    @if ($teachers->isEmpty())
+        <p>No hay Profesores registrados en el centro.</p>
     @else
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <a href="{{ route('students.create') }}" role="button"><button type="button" class="crear"
+                    <a href="{{ route('teachers.create') }}" role="button"><button type="button" class="crear"
                             data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-plus-lg">+</i></button></a>
                 </tr>
                 <tr>
                     <th>Ver</th>
                     <th>Nombre</th>
-                    <th>Edad</th>
+                    <th>Profesion</th>
+                    <th>Grado Academico</th>
                     <th>Telefono</th>
-                    <th>Direccion</th>
                     <th colspan="2">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($students as $student)
+                @foreach ($teachers as $teacher)
                     <tr>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('students.show', $student->id) }}">
+                            <a class="btn btn-show" href="{{ route('teachers.show', $teacher->id) }}">
                                 👁️
                             </a>
                         </td>
-                        <td>{{ $student->nombre_apellido }}</td>
-                        <td>{{ $student->edad }}</td>
-                        <td>{{ $student->telefono }}</td>
-                        <td>{{ $student->direccion }}</td>
+                        <td>{{ $teacher->nombreApellido }}</td>
+                        <td>{{ $teacher->profesion }}</td>
+                        <td>{{ $teacher->gradoAcademico }}</td>
+                        <td>{{ $teacher->telefono }}</td>
 
                         <td>
-                            <a class="btn btn-primary" href="{{ route('students.edit', $student->id) }}">
+                            <a class="btn btn-primary" href="{{ route('teachers.edit', $teacher->id) }}">
 
                                 <button class="btn" type="submit">Modificar</button>
                             </a>
                         </td>
 
                         <td>
-                            <form action="{{ route('students.destroy', $student->id) }}" method="POST">
+                            <form action="{{ route('teachers.destroy', $teacher->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Eliminar</button>
