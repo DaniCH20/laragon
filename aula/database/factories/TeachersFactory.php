@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Teachers;
 
-class TeacherFactory extends Factory
+class TeachersFactory extends Factory
 {
     protected $model = Teachers::class;
 
@@ -21,7 +21,7 @@ class TeacherFactory extends Factory
                 'Maestría',
                 'Doctorado'
             ]),
-            'telefono'       => $this->faker->phoneNumber(),
+            'telefono'       => $this->faker->numerify('#########'),
         ];
     }
 }

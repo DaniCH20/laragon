@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
-
+use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\TeachersController;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canRegister' => Features::enabled(Features::registration()),
@@ -15,3 +17,9 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/settings.php';
+Route::get('/students', [StudentsController::class, 'index'])->name('students.index');
+Route::resources([
+        'students' => StudentsController::class,
+        'courses' => CoursesController::class,
+        'teachers' => TeachersController::class,
+    ]);
