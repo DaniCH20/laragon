@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Courses;
+use App\Models\Teachers;
 
 class CoursesController extends Controller
 {
@@ -11,7 +13,9 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Courses::all();
+        $teachers = Teachers::all();
+        return view('course', compact('courses') ,compact('teachers'));
     }
 
     /**
@@ -19,7 +23,8 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        $teachers = Teachers::all();
+         return view('courses.create',compact('teachers'));
     }
 
     /**
@@ -27,7 +32,13 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course=New Courses();
+        $course->nombre_Apellido=$request->nombre;
+        $course->nivel=$request->nivel;
+        $course->horasAcademicas=$request->horasAcademicas;
+        $course->profesor_id=$request->profesor_id;
+        $course->save();
+        return redirect()->route('courses.index')->with('success', 'Courses creado correctamente');
     }
 
     /**
@@ -35,7 +46,9 @@ class CoursesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $course = Courses::findOrFail($id);
+
+        return view('courses.show', compact('course'));
     }
 
     /**
@@ -43,7 +56,9 @@ class CoursesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+         $course = Courses::findOrFail($id);
+
+        return view('courses.edit', compact('course'));
     }
 
     /**
@@ -51,7 +66,11 @@ class CoursesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $course = Courses::findOrFail($id);
+
+        $course->update($request->all());
+
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -59,6 +78,9 @@ class CoursesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $course = Courses::findOrFail($id);
+        $course->delete();
+
+        return redirect()->route('courses.index');
     }
 }
