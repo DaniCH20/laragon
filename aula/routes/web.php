@@ -6,6 +6,7 @@ use Laravel\Fortify\Features;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\TeachersController;
+use App\Http\Controllers\Auth;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canRegister' => Features::enabled(Features::registration()),
@@ -23,3 +24,7 @@ Route::resources([
         'courses' => CoursesController::class,
         'teachers' => TeachersController::class,
     ]);
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
