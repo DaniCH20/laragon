@@ -34,7 +34,7 @@
                         <td>{{ $course->nivel }}</td>
                         <td>{{ $course->horasAcademicas }}</td>
 
-                        <td>{{ $course->profesor_id }}</td>
+                        <td>{{ $course->teacher->nombreApellido ?? 'Sin profesor' }}</td>
 
                         <td>
                             <a class="btn btn-primary" href="{{ route('courses.edit', $course->id) }}">

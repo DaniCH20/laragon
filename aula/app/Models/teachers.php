@@ -13,4 +13,8 @@ class teachers extends Model
     protected $fillable = ['nombreApellido','profesion',
     'gradoAcademico','telefono'];
     protected $guarded=['id','created_at','updated_at'];
+    public function courses()
+    {
+        return $this->hasMany('App\Models\Courses');
+    }
 }

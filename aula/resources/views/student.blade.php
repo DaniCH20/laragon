@@ -26,7 +26,7 @@
                 @foreach ($students as $student)
                     <tr>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('students.show', $student->id) }}">
+                            <a class="btn " href="{{ route('students.show', $student->id) }}">
                                 👁️
                             </a>
                         </td>

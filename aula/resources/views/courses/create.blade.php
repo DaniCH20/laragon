@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <h1>Crear Cursos</h1>
     <form class="mt-2" name="create_platform" action="{{ route('courses.store') }}" method="POST"
@@ -26,3 +28,4 @@
         <button type="submit" class="btn btn-primary" name="">Crear</button>
     </form>
 </div>
+@endsection

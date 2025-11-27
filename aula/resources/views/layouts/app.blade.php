@@ -30,7 +30,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                       <div id="bloque-botones-nav" id="navigation" onchange="redirectToPage()">
+                            <!-- Contenido de botones nav según el rol -->
+                            <a class="btn btn-outline-primary" href="/students">Students</a>
+                            <a class="btn btn-outline-primary" href="/teachers">Teachers</a>
+                            <a class="btn btn-outline-primary" href="/courses">Courses</a>
+                        </div>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

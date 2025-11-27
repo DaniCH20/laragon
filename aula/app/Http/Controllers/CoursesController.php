@@ -13,9 +13,8 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Courses::all();
-        $teachers = Teachers::all();
-        return view('course', compact('courses') ,compact('teachers'));
+        $courses = Courses::with('teacher')->get();
+        return view('course', compact('courses'));
     }
 
     /**
@@ -24,7 +23,7 @@ class CoursesController extends Controller
     public function create()
     {
         $teachers = Teachers::all();
-         return view('courses.create',compact('teachers'));
+        return view('courses.create', compact('teachers'));
     }
 
     /**
@@ -32,11 +31,11 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        $course=New Courses();
-        $course->nombre_Apellido=$request->nombre;
-        $course->nivel=$request->nivel;
-        $course->horasAcademicas=$request->horasAcademicas;
-        $course->profesor_id=$request->profesor_id;
+        $course = new Courses();
+        $course->nombre_Apellido = $request->nombre;
+        $course->nivel = $request->nivel;
+        $course->horasAcademicas = $request->horasAcademicas;
+        $course->profesor_id = $request->profesor_id;
         $course->save();
         return redirect()->route('courses.index')->with('success', 'Courses creado correctamente');
     }
@@ -56,9 +55,9 @@ class CoursesController extends Controller
      */
     public function edit(string $id)
     {
-         $course = Courses::findOrFail($id);
-
-        return view('courses.edit', compact('course'));
+        $course = Courses::findOrFail($id);
+        $teachers = Teachers::all();
+        return view('courses.edit', compact('course'), compact('teachers'));
     }
 
     /**
