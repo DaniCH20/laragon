@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\courses;
 use Illuminate\Http\Request;
 use App\Models\Students;
 
@@ -12,8 +13,8 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $students = Students::all();
-
+        $paginationCount = env('PAGINATION_COUNT', 10);
+        $students = Students::paginate($paginationCount);
         return view('student', compact('students'));
     }
 
@@ -30,14 +31,14 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        $student=New Students();
-        $student->nombre_Apellido=$request->nombre;
-        $student->edad=$request->edad;
-        $student->telefono=$request->telefono;
-        $student->direccion=$request->direccion;
-        $student->foto=$request->foto;
+        $student = new Students();
+        $student->nombre_Apellido = $request->nombre;
+        $student->edad = $request->edad;
+        $student->telefono = $request->telefono;
+        $student->direccion = $request->direccion;
+        $student->foto = $request->foto;
         $student->save();
-         return redirect()->route('students.index')->with('success', 'Estudiante creado correctamente');
+        return redirect()->route('students.index')->with('success', 'Estudiante creado correctamente');
     }
 
     /**
@@ -45,7 +46,7 @@ class StudentsController extends Controller
      */
     public function show(string $id)
     {
-         $student = Students::findOrFail($id);
+        $student = Students::findOrFail($id);
 
         return view('students.show', compact('student'));
     }

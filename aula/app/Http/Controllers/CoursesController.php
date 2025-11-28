@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Courses;
 use App\Models\Teachers;
-
+use App\Models\Students;
 class CoursesController extends Controller
 {
     /**
@@ -14,6 +14,7 @@ class CoursesController extends Controller
     public function index()
     {
         $courses = Courses::with('teacher')->get();
+
         return view('course', compact('courses'));
     }
 
@@ -25,7 +26,13 @@ class CoursesController extends Controller
         $teachers = Teachers::all();
         return view('courses.create', compact('teachers'));
     }
+    public function matricula(string $id)
+    {
+        $course = Courses::with('students')->findOrFail($id);
+        $students = $course->students;
 
+        return view('courses.matricula', compact('course', 'students'));
+    }
     /**
      * Store a newly created resource in storage.
      */

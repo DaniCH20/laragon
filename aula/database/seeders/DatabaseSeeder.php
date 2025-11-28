@@ -6,7 +6,8 @@ use App\Models\User;
 use App\Models\students;
 use App\Models\teachers;
 use App\Models\courses;
- use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\CourseStudentFactory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,26 +15,22 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
+     public function run(): void
     {
-        // User::factory(10)->create();
+
+        $teachers = Teachers::factory(5)->create();
+
+         $students = students::factory(25)->create();
+
+         $courses = Courses::factory(5)->create();
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' =>  fake()->unique()->safeEmail(),
+            'email' => fake()->unique()->safeEmail(),
         ]);
-        $this->call([
-            StudentSeeder::class,
-        ]);
-        $this->call([
-            TeacherSeeder::class,
-        ]);
-         $this->call([
-            CourseSeeder::class,
-        ]);
-
-        teachers::factory(5)->create();
-        courses::factory(5)->create();
-        students::factory(20)->create();
+        foreach ($students as $student) {
+            $randomCourses = $courses->random(rand(1, 3));
+            $student->courses()->attach($randomCourses);
+        }
     }
 }

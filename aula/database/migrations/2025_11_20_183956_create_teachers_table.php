@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombreApellido');
             $table->string('profesion');
             $table->string('gradoAcademico');
-            $table->integer('telefono');
+            $table->integer('telefono')->nullable();
             $table->timestamps();
         });
     }
