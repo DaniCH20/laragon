@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\courses;
 use Illuminate\Http\Request;
 use App\Models\Students;
+use App\Models\students as ModelsStudents;
 
 class StudentsController extends Controller
 {
@@ -57,8 +58,9 @@ class StudentsController extends Controller
     public function edit(string $id)
     {
         $student = Students::findOrFail($id);
-
-        return view('students.edit', compact('student'));
+        $courses = Courses::all();
+        $coursesM = $student->courses;
+        return view('students.edit', compact('student', 'coursesM', 'courses'));
     }
 
     /**
@@ -67,12 +69,30 @@ class StudentsController extends Controller
     public function update(Request $request, string $id)
     {
         $student = Students::findOrFail($id);
+        $student->update([
+            'nombre_apellido' => $request->nombre,
+            'edad' => $request->edad,
+            'telefono' => $request->telefono,
+            'direccion' => $request->direccion,
+            'foto' => $request->foto,
+        ]);
 
-        $student->update($request->all());
+        if ($request->has('courses')) {
+            $student->courses()->sync($request->courses);
+        } else {
+            $student->courses()->detach();
+        }
 
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'Estudiante actualizado correctamente');
     }
+    public function search(Request $request)
+    {
+        $query = $request->get('search');
 
+        $students =Students::where('nombre_apellido', 'LIKE', "%{$query}%")
+            ->get();
+        return view('student', compact('students'));
+    }
     /**
      * Remove the specified resource from storage.
      */

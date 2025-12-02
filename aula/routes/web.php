@@ -30,3 +30,4 @@ Route::resources([
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/courses/matricula/{id}', [CoursesController::class, 'matricula'])
     ->name('courses.matricula');
+Route::get('search', [StudentsController::class, 'search'])->name('students.search');

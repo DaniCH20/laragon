@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <div class="input-group mb-3">
+            <form method="GET" action="{{ route('students.search') }}">
+                <input type="text" name="search" placeholder="Buscar...">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
         <h1>Lista de Alumnos</h1>
 
         @if ($students->isEmpty())
@@ -55,9 +61,11 @@
                 </tbody>
             </table>
         @endif
-        <div class="pagination mt-3">
-            {{ $students->links('pagination::simple-bootstrap-4') }}
-        </div>
+        @if (!request()->has('search') && method_exists($students, 'links'))
+            <div class="pagination mt-3">
+                {{ $students->links('pagination::simple-bootstrap-4') }}
+            </div>
+        @endif
     </div>
 
 @endsection

@@ -44,23 +44,29 @@
                 </tr>
             </tbody>
         </table>
-        @foreach ($courses as $course)
+        @foreach ($teacher->courses as $course)
+            <h4>Curso: {{ $course->nombre }}</h4>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th colspan="2">Curso {{ $course->nombre }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($students as $student)
-                    <tr>
-                        <td>Nombre del Estudiante:</td>
-                        <td>{{ $student->nombre_apellido }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if ($course->students->isEmpty())
+                <p>Este curso no tiene estudiantes matriculados.</p>
+            @else
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Alumnos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($course->students as $student)
+                            <tr>
+                                <td>{{ $student->nombre_apellido }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+
+            <hr>
         @endforeach
     </div>
 @endsection

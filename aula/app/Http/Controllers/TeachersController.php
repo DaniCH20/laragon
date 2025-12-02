@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teachers;
+use App\Models\Courses;
+use App\Models\Students;
 
 class TeachersController extends Controller
 {
@@ -44,7 +46,7 @@ class TeachersController extends Controller
      */
     public function show(string $id)
     {
-        $teacher = teachers::findOrFail($id);
+        $teacher = Teachers::with(['courses.students'])->findOrFail($id);
 
         return view('teachers.show', compact('teacher'));
     }

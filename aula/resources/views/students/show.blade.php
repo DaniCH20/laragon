@@ -12,8 +12,6 @@
             </thead>
 
             <tbody>
-
-
                 <tr>
                     <td>Nombre del Estudiante:</td>
                     <td>{{ $student->nombre_apellido }}</td>
@@ -34,7 +32,6 @@
                     <td>Foto:</td>
                     <td> {{ $student->foto }}</td>
                 </tr>
-
                 <tr>
                     <td>
                         <a class="btn btn-primary" href="{{ route('students.edit', $student->id) }}">

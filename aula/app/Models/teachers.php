@@ -15,6 +15,6 @@ class teachers extends Model
     protected $guarded=['id','created_at','updated_at'];
     public function courses()
     {
-        return $this->hasMany('App\Models\Courses');
+        return $this->hasMany(Courses::class, 'profesor_id');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Database\Factories\CourseFactory;
+
 class courses extends Model
 {
     use HasFactory;
@@ -18,7 +19,7 @@ class courses extends Model
         return $this->belongsToMany(Students::class, 'course_student', 'course_id', 'student_id');
     }
     public function teacher()
-{
-    return $this->belongsTo(Teachers::class, 'profesor_id');
-}
+    {
+        return $this->belongsTo(Teachers::class, 'profesor_id');
+    }
 }
