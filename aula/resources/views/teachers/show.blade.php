@@ -5,17 +5,13 @@
 
         <table class="table table-striped">
             <thead>
-
                 <tr>
                     <th colspan="2">Datos Personales</th>
                 </tr>
             </thead>
-
             <tbody>
-
-
                 <tr>
-                    <td>Nombre del Estudiante:</td>
+                    <td>Nombre del Profesor:</td>
                     <td>{{ $teacher->nombreApellido }}</td>
                 </tr>
                 <tr>
@@ -46,11 +42,25 @@
                         </form>
                     </td>
                 </tr>
-
-
-
-
             </tbody>
         </table>
+        @foreach ($courses as $course)
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="2">Curso {{ $course->nombre }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($students as $student)
+                    <tr>
+                        <td>Nombre del Estudiante:</td>
+                        <td>{{ $student->nombre_apellido }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endforeach
     </div>
 @endsection

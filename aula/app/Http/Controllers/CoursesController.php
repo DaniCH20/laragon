@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Courses;
 use App\Models\Teachers;
 use App\Models\Students;
+use App\Models\Course_student;
 class CoursesController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class CoursesController extends Controller
     public function store(Request $request)
     {
         $course = new Courses();
-        $course->nombre_Apellido = $request->nombre;
+        $course->nombre = $request->nombre;
         $course->nivel = $request->nivel;
         $course->horasAcademicas = $request->horasAcademicas;
         $course->profesor_id = $request->profesor_id;
@@ -52,9 +53,10 @@ class CoursesController extends Controller
      */
     public function show(string $id)
     {
-        $course = Courses::findOrFail($id);
 
-        return view('courses.show', compact('course'));
+        $course = Courses::with('teacher')->findOrFail($id);
+        $teacher = $course->teachers;
+        return view('courses.show', compact('course','teacher'));
     }
 
     /**

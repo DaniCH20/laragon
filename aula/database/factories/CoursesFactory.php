@@ -23,7 +23,7 @@ class CoursesFactory extends Factory
         return [
             'nombre' => fake()->name(),
             'nivel' => fake()->randomDigit(),
-            'horasAcademicas' => fake()->randomNumber(),
+            'horasAcademicas' => fake()->randomElement([10, 40, 80]),
             'profesor_id' => Teachers::inRandomOrder()->first()->id
                 ?? Teachers::factory()->create()->id,
         ];

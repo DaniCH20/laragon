@@ -5,6 +5,7 @@
         <form class="mt-2" name="create_platform" action="{{ route('teachers.update', $teacher) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
+              @method('PUT')
             <div class="form-group mb-3">
                 <label for="dni" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre"
