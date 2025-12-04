@@ -37,7 +37,10 @@ class StudentsController extends Controller
         $student->edad = $request->edad;
         $student->telefono = $request->telefono;
         $student->direccion = $request->direccion;
-        $student->foto = $request->foto;
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('fotos', 'public');
+            $student->foto = 'storage/' . $path;
+        }
         $student->save();
         return redirect()->route('students.index')->with('success', 'Estudiante creado correctamente');
     }
@@ -89,7 +92,7 @@ class StudentsController extends Controller
     {
         $query = $request->get('search');
 
-        $students =Students::where('nombre_apellido', 'LIKE', "%{$query}%")
+        $students = Students::where('nombre_apellido', 'LIKE', "%{$query}%")
             ->get();
         return view('student', compact('students'));
     }

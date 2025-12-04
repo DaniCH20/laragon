@@ -23,7 +23,7 @@
         </div>
         <div class="form-group mb-3">
             <label for="foto" class="form-label">Foto</label>
-            <input type="text" class="form-control" id="foto" name="foto" required />
+            <input type="file" class="form-control" id="foto" name="foto" required />
         </div>
         <button type="submit" class="btn btn-primary" name="">Crear</button>
     </form>

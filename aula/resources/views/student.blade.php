@@ -34,7 +34,7 @@
                         <tr>
                             <td>
                                 <a class="btn " href="{{ route('students.show', $student->id) }}">
-                                    👁️
+                                    <img src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle">
                                 </a>
                             </td>
                             <td>{{ $student->nombre_apellido }}</td>

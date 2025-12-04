@@ -12,12 +12,20 @@ class StudentsFactory extends Factory
 
     public function definition(): array
     {
+        $imagePath = $this->faker->image(
+            storage_path('app/public/fotos'), // ✔ ruta correcta
+            300,
+            300,
+            'people',
+            false
+        );
+
         return [
             'nombre_apellido' => $this->faker->name(),
             'edad'            => $this->faker->numberBetween(10, 25),
             'telefono'        => $this->faker->numerify('#########'),
             'direccion'       => $this->faker->address(),
-            'foto'            => $this->faker->imageUrl(300, 300, 'people', true),
+            'foto'            => 'storage/fotos/' . $imagePath,
         ];
     }
 }
