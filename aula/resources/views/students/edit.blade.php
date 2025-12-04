@@ -27,7 +27,9 @@
             </div>
             <div class="form-group mb-3">
                 <label for="foto" class="form-label">Foto</label>
-                <input type="text" class="form-control" id="foto" name="foto" value="{{ $student->foto }}" />
+                <img onerror="this.onerror=null;this.src=`https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010`"
+                    src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle">
+                <input type="file" class="form-control" id="foto" name="foto" required />
             </div>
 
             <div class="form-group mb-3">

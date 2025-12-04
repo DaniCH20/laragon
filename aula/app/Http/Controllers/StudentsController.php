@@ -72,12 +72,16 @@ class StudentsController extends Controller
     public function update(Request $request, string $id)
     {
         $student = Students::findOrFail($id);
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('fotos', 'public');
+            $student->foto = 'storage/' . $path;
+        }
         $student->update([
             'nombre_apellido' => $request->nombre,
             'edad' => $request->edad,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
-            'foto' => $request->foto,
+
         ]);
 
         if ($request->has('courses')) {

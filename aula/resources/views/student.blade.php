@@ -34,7 +34,7 @@
                         <tr>
                             <td>
                                 <a class="btn " href="{{ route('students.show', $student->id) }}">
-                                    <img src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle">
+                                    <img onerror="this.onerror=null;this.src=`https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010`" src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle">
                                 </a>
                             </td>
                             <td>{{ $student->nombre_apellido }}</td>

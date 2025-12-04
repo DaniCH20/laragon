@@ -21,7 +21,15 @@ class CoursesFactory extends Factory
     {
         $teacher = Teachers::All();
         return [
-            'nombre' => fake()->name(),
+            'nombre' => fake()->randomElement([
+                'Matemáticas',
+                'Lenguaje',
+                'Programación',
+                'Historia',
+                'Ciencias',
+                'Música',
+                'Inglés'
+            ]),
             'nivel' => fake()->numberBetween(1, 10),
             'horasAcademicas' => fake()->randomElement([10, 40, 80]),
             'profesor_id' => Teachers::inRandomOrder()->first()->id

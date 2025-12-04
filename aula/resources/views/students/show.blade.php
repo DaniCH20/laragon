@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>Foto:</td>
-                    <td> {{ $student->foto }}</td>
+                    <td> <img onerror="this.onerror=null;this.src=`https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010`" src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle"></td>
                 </tr>
                 <tr>
                     <td>
