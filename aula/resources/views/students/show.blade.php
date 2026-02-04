@@ -30,7 +30,21 @@
                 </tr>
                 <tr>
                     <td>Foto:</td>
-                    <td> <img onerror="this.onerror=null;this.src=`https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010`" src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle"></td>
+                    <td> <img
+                            onerror="this.onerror=null;this.src=`https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010`"
+                            src="{{ asset($student->foto) }}" width="80" height="80" class="rounded-circle"></td>
+                </tr>
+                <tr>
+                    <td>Cursos Inscritos:</td>
+                    @foreach ($courses as $course)
+                        <td style="display: flex; align-items: center; gap: 5px;">
+
+                            <label for="course-{{ $course->id }}">
+                                {{ $course->nombre }}
+                            </label>
+                        </td>
+                    @endforeach
+
                 </tr>
                 <tr>
                     <td>
